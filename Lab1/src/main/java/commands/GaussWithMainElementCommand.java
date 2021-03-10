@@ -39,7 +39,7 @@ public class GaussWithMainElementCommand implements Command {
             //выбор главного элемента
             int l = i;
             for (int m = i + 1; m <= n; m++) {
-                if (a.get(m).getByIndex(i) > a.get(l).getByIndex(i)) {
+                if (Math.abs(a.get(m).getByIndex(i)) > Math.abs(a.get(l).getByIndex(i))) {
                     l = m;
                 }
             }
@@ -68,6 +68,7 @@ public class GaussWithMainElementCommand implements Command {
                     gaussSolutions[i] = (a.get(i).getByIndex(n + 1) - s) / a.get(i).getByIndex(i);
                 }
                 system.setSolutions(gaussSolutions);
+                system.addView(name, triangleMatrix);
                 break;
             case INFINITY_SOLUTION:
                 adapter.writeln("Система имеет бесконечное число решений");
@@ -76,7 +77,6 @@ public class GaussWithMainElementCommand implements Command {
                 adapter.writeln("Система не имеет решений");
                 break;
         }
-        system.addView(name, triangleMatrix);
     }
 
     private Solution checkSolution(Matrix triangleMatrix){

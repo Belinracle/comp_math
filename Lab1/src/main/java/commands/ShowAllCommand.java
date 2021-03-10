@@ -46,7 +46,7 @@ public class ShowAllCommand implements Command {
                 if (counter == doubles.size() - 1) {
                     adapter.write(" || ");
                 }
-                adapter.write(String.format("%17e", doubles.get(counter)));
+                adapter.write(String.format("%17.5f", doubles.get(counter)));
             }
             adapter.write("\n");
         }
