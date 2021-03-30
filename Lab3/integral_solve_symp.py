@@ -14,6 +14,8 @@ def solve_with_eps_sympson(a, b, n, func, eps):
 
 def solve_integral(a, b, n, func):
     x = np.linspace(a, b, n, True)
-    y = func(x)
+    y=[]
+    for i in x:
+        y.append(func(i))
     h = (b - a) / n
     return (h / 3) * (y[0] + 4 * (sum(y[1:len(x) - 2:2])) + 2 * (sum(y[2:len(x) - 3:2])) + y[len(y) - 1])
