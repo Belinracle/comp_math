@@ -9,8 +9,6 @@ def get_coefficients(x, y):
     c = [None] * n
     for i in range(1, n):
         h[i] = x[i] - x[i - 1]
-        if h[i] == 0:
-            return ValueError
         l[i] = (y[i] - y[i - 1]) / h[i]
     delta[1] = - h[2] / (2 * (h[1] + h[2]))
     lamb[1] = 1.5 * (l[2] - l[1]) / (h[1] + h[2])
