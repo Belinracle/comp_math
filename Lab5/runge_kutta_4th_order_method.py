@@ -1,8 +1,9 @@
-def calculate_h(x0, y0, fxy, fx, inaccuracy):
-    h = 16
-    while abs(calculate_next_y(x0, y0, fxy, h) - fx(x0 + h)) > inaccuracy:
+def calculate_h(x0, y0, fxy, fx, c_integral, inaccuracy):
+    h = 8
+    while abs(calculate_next_y(x0, y0, fxy, h) - fx(x0 + h, c_integral)) > inaccuracy:
         h = h / 2
-    print("h in iter : " + str(h))
+    # print("h in iter : " + str(h))
+
     return h
 
 
@@ -15,13 +16,13 @@ def calculate_next_y(x, y, fxy, h):
     return y_next
 
 
-def calculate_data_set(x0, y0, x_last, fxy, fx, inaccuracy):
+def calculate_data_set(x0, y0, x_last, fxy, fx, c_integral, inaccuracy):
     x = []
     y = []
     x.append(x0)
     y.append(y0)
-    h = calculate_h(x[len(x) - 1], fx(x[len(x) - 1]), fxy, fx, inaccuracy)
     while x[len(x) - 1] < x_last:
+        h = calculate_h(x[len(x) - 1], fx(x[len(x) - 1], c_integral), fxy, fx, c_integral, inaccuracy)
         x.append(x[len(x) - 1] + h)
         y.append(calculate_next_y(x[len(x) - 2], y[len(y) - 1], fxy, h))
     x.pop(len(x) - 1)
@@ -31,3 +32,6 @@ def calculate_data_set(x0, y0, x_last, fxy, fx, inaccuracy):
     print(x)
     print(y)
     return x, y
+
+
+
