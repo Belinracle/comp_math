@@ -8,13 +8,17 @@ def solve_system(matrix_a, column_b):
     for i in range(len(matrix_a)):
         buf = 0
         for a in range(i):
-            print(l_matrix[i][a])
-            print(y[a])
-            print(buf)
-            print()
             buf += l_matrix[i][a] * y[a]
-        y.append((column_b[i] - buf) / l_matrix[i][i])
-    return y
+        y.append(round((column_b[i] - buf) / l_matrix[i][i], 5))
+    l_t_matrix = np.transpose(l_matrix)
+    length = len(l_t_matrix)
+    x = [0] * length
+    for i in range(length)[::-1]:
+        buf = 0
+        for a in range(i, length):
+            buf += l_t_matrix[i][a] * x[a]
+        x[i] = round((y[i] - buf) / l_t_matrix[i][i], 5)
+    return x
 
 
 def create_l_matrix(matrix_a):
